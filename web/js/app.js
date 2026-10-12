@@ -88,8 +88,10 @@
     return String(s || "").replace(/[ً-ٰٟـ]/g, "").replace(/[أإآٱ]/g, "ا").replace(/ى/g, "ي").replace(/ة/g, "ه").replace(/ؤ/g, "و").replace(/ئ/g, "ي").toLowerCase();
   }
   function icon(id, cls) { return '<svg' + (cls ? ' class="' + cls + '"' : "") + '><use href="#' + id + '"/></svg>'; }
-  var STAR = '<svg viewBox="0 0 100 100"><use href="#star8"/></svg>';
-  function lbl(t) { return '<div class="lbl">' + STAR + t + "</div>"; }
+  function bul() { return window.ORN ? ORN.bullet() : ""; }
+  function lbl(t) { return '<div class="lbl">' + bul() + t + "</div>"; }
+  function eyebrow(t) { return '<span class="eyebrow">' + bul() + t + "</span>"; }
+  function medal(inner, cls) { return '<span class="med' + (cls ? " " + cls : "") + '">' + ORN.rosette() + (inner ? "<b>" + inner + "</b>" : "") + "</span>"; }
   function hair(p) { return '<div class="hair"><span style="width:' + p + '%"></span></div>'; }
   function toast(msg) {
     var t = $("#toast");
@@ -125,7 +127,7 @@
     var body = (s.s === "p" && s.x.indexOf(" ** ") !== -1)
       ? '<div class="bayt">' + s.x.split(" ** ").map(function (p) { return "<span>" + hl(p, hs) + "</span>"; }).join("") + "</div>"
       : hl(s.x, hs);
-    return '<div class="sh"><div class="sh-top"><span class="tag ' + s.s + '">' + TYPE[s.s] + "</span>" +
+    return '<div class="illum sm"><div class="sh-top"><span class="tag ' + s.s + '">' + TYPE[s.s] + "</span>" +
       (s.ref ? "<span>" + esc(ar(s.ref)) + "</span>" : "") + "</div>" +
       '<div class="sh-x ' + s.s + '">' + body + "</div>" +
       (s.w && withW !== false ? '<div class="sh-w"><b>وجه الشاهد:</b> ' + esc(s.w) + "</div>" : "") + "</div>";
@@ -187,12 +189,11 @@
     var total = flat.length, shs = chapters.reduce(function (n, c) { return n + c.shCount; }, 0);
     var p = pct(done.size, total), C = 150.8;
     var last = prefs.last && byKey[prefs.last];
-    var h = '<section class="frame hero">' +
-      '<svg class="medal" viewBox="0 0 100 100"><use href="#star8" class="s1"/><circle cx="50" cy="50" r="26" class="s2"/><path class="s3" d="M50 34c0 0-10 12-10 19a10 10 0 0 0 20 0c0-7-10-19-10-19Z"/></svg>' +
-      "<h2>متن <em>قطر الندى</em> وبلّ الصدى</h2>" +
-      '<p class="by">للإمام جمال الدين ابن هشام الأنصاري · ت ٧٦١هـ</p>' +
-      '<div class="stats"><div class="stat"><b>' + ar(chapters.length) + "</b><span>بابًا</span></div>" + icon("star8", "dot").replace("<svg", '<svg viewBox="0 0 100 100"') +
-      '<div class="stat"><b>' + ar(total) + "</b><span>فرعًا</span></div>" + icon("star8", "dot").replace("<svg", '<svg viewBox="0 0 100 100"') +
+    var h = '<section class="illum hero has-crest has-crest-b"><i class="crest t"></i><i class="crest b"></i>' +
+      "<h2>قَطْرُ النَّدَى وَبَلُّ الصَّدَى</h2>" +
+      '<p class="by">مشجرة المتن للإمام جمال الدين ابن هشام الأنصاري · ت ٧٦١هـ</p>' +
+      '<div class="stats"><div class="stat"><b>' + ar(chapters.length) + "</b><span>بابًا</span></div>" + bul() +
+      '<div class="stat"><b>' + ar(total) + "</b><span>فرعًا</span></div>" + bul() +
       '<div class="stat"><b>' + ar(shs) + "</b><span>شاهدًا</span></div></div>" +
       '<div class="progress"><svg class="ring" viewBox="0 0 56 56"><circle class="bgc" cx="28" cy="28" r="24"/><circle class="fgc" cx="28" cy="28" r="24" stroke-dasharray="' + C + '" stroke-dashoffset="' + (C - C * p / 100) + '"/></svg>' +
       '<div class="pt"><b>' + ar(p) + "٪</b><span>" + (done.size ? "فهمتَ " + ar(done.size) + " فرعًا" : "ابدأ وعلّم ما تفهمه") + "</span></div></div>" +
@@ -204,10 +205,10 @@
     if (!chapters.length) h += '<div class="empty">لم تُحمَّل بيانات المتن.</div>';
 
     sections().forEach(function (g) {
-      h += '<div class="sec-h"><svg viewBox="0 0 100 100"><use href="#khatam"/></svg><h3>' + esc(g.sec.t) + '</h3></div><div class="ch-list">';
+      h += '<div class="sec-h">' + ORN.sprig() + "<h3>" + esc(g.sec.t) + '</h3></div><div class="ch-list">';
       g.list.forEach(function (ch) {
         var dn = chDone(ch), cp = pct(dn, ch.all.length);
-        h += '<button class="ch" data-go="#/ch/' + ch.key + '"><span class="med' + (cp === 100 ? " done" : "") + '"><b>' + ar(ch.num) + "</b></span>" +
+        h += '<button class="ch" data-go="#/ch/' + ch.key + '">' + medal(ar(ch.num), cp === 100 ? "done" : "") +
           '<span class="ch-main"><div class="ch-t">' + esc(ch.node.t) + '</div><div class="ch-meta">' + ar(ch.all.length - 1) + " فرعًا · " + ar(ch.shCount) + " شاهدًا" + (dn ? " · فهمتَ " + ar(dn) : "") + "</div>" + hair(cp) + "</span>" +
           icon("i-next", "ch-go") + "</button>";
       });
@@ -226,7 +227,7 @@
   }
 
   function renderBigMap() {
-    var h = '<section class="frame ch-head"><span class="eyebrow">' + STAR + "المشجرة الكبرى</span><h2>أبواب المتن كلها</h2>" +
+    var h = '<section class="illum thin has-crest ch-head"><i class="crest t"></i>' + eyebrow("المشجرة الكبرى") + "<h2>أبواب المتن كلها</h2>" +
       '<p class="lead">أبواب «قطر الندى» على شجرة واحدة بترتيب ابن هشام، اضغط أي باب لتفتح مشجرته التفصيلية.</p>' +
       '<div class="tools"><span class="hint" style="margin:0">التكبير</span>' + zoomTools() + "</div></section>";
     h += '<div class="map-wrap"><div class="mm mm-top" style="zoom:' + zoom + '"><button class="mm-node d0 root" data-about>قطر الندى</button><div class="mm-trunk">';
@@ -275,7 +276,7 @@
   function renderChapter(ch, keepZoom) {
     var mode = prefs.view === "list" ? "list" : "map";
     var dn = chDone(ch), cp = pct(dn, ch.all.length);
-    var h = '<section class="frame ch-head"><span class="eyebrow">' + STAR + "الباب " + ar(ch.num) + " · " + esc(ch.sec.t) + "</span>" +
+    var h = '<section class="illum thin has-crest ch-head"><i class="crest t"></i>' + eyebrow("الباب " + ar(ch.num) + " · " + esc(ch.sec.t)) +
       "<h2>" + esc(ch.node.t) + "</h2>" +
       (ch.node.d ? '<p class="lead">' + esc(ch.node.d) + "</p>" : "") +
       '<div class="pline"><span>فهمتَ ' + ar(dn) + " من " + ar(ch.all.length) + "</span>" + hair(cp) + "</div>" +
@@ -396,7 +397,7 @@
   var lastQuery = "";
 
   function renderSearch() {
-    view.innerHTML = '<section class="frame"><span class="eyebrow">' + STAR + "البحث في المتن</span>" +
+    view.innerHTML = '<section class="illum thin">' + eyebrow("البحث في المتن") +
       '<label class="search-box">' + icon("i-search") + '<input id="q" type="search" placeholder="الحال، لن، كان، فاء السببية…" autocomplete="off" value="' + esc(lastQuery) + '"></label>' +
       '<p class="hint">يبحث في العناوين والشروح والشروط والشواهد، ولا يتأثر بالتشكيل.</p></section><div id="results"></div>';
     var q = $("#q");
@@ -405,7 +406,7 @@
     if (!lastQuery) setTimeout(function () { q.focus(); }, 60);
   }
 
-  function emptyState(msg) { return '<div class="empty"><svg viewBox="0 0 100 100"><use href="#khatam"/></svg>' + msg + "</div>"; }
+  function emptyState(msg) { return '<div class="empty">' + medal("") + msg + "</div>"; }
 
   function doSearch(q) {
     var out = $("#results");
@@ -465,8 +466,8 @@
   function renderQuiz() {
     if (!quiz.cur) newQuestion();
     var c = quiz.cur;
-    var h = '<section class="frame"><span class="eyebrow">' + STAR + "اختبر نفسك بالشواهد</span>" +
-      '<div class="qhead" style="margin-top:.5rem"><select class="sel" id="quiz-ch"><option value="">كل الأبواب</option>' +
+    var h = '<section class="illum thin">' + eyebrow("اختبر نفسك بالشواهد") +
+      '<div class="qhead"><select class="sel" id="quiz-ch"><option value="">كل الأبواب</option>' +
       chapters.map(function (ch) { return '<option value="' + ch.key + '"' + (quiz.ch === ch.key ? " selected" : "") + ">" + ar(ch.num) + " · " + esc(ch.node.t) + "</option>"; }).join("") +
       '</select><div class="score"><span>الصحيح <b>' + ar(quiz.score) + "</b> من <b>" + ar(quiz.total) + "</b></span><span>متتالية <b>" + ar(quiz.streak) + "</b></span></div></div>";
     if (!c) { view.innerHTML = h + emptyState("لا شواهد في هذا الباب") + "</section>"; bindQuizSelect(); return; }
@@ -503,11 +504,11 @@
 
   function renderSaved() {
     var list = Array.from(stars).map(function (k) { return byKey[k]; }).filter(Boolean).sort(function (a, b) { return a.i - b.i; });
-    var h = '<section class="frame"><span class="eyebrow">' + STAR + "المحفوظات</span>";
+    var h = '<section class="illum thin">' + eyebrow("المحفوظات");
     h += list.length ? '<div style="margin-top:.6rem">' + list.map(function (e) {
       return '<button class="res" data-open="' + e.key + '"><div class="rp">' + esc(e.ch.node.t) + '</div><div class="rt">' + esc(e.node.t) + "</div></button>";
     }).join("") + "</div>" : emptyState("اضغط علامة الحفظ في صفحة أي فرع ليظهر هنا");
-    h += '</section><section class="frame"><span class="eyebrow">' + STAR + 'تقدّمك في الأبواب</span><div style="margin-top:.6rem">';
+    h += '</section><section class="illum thin">' + eyebrow("تقدّمك في الأبواب") + '<div style="margin-top:.6rem">';
     chapters.forEach(function (ch) {
       var dn = chDone(ch);
       h += '<button class="res" data-go="#/ch/' + ch.key + '"><div class="rt">' + ar(ch.num) + " · " + esc(ch.node.t) + '</div><div class="pline"><span>' + ar(dn) + " من " + ar(ch.all.length) + "</span>" + hair(pct(dn, ch.all.length)) + "</div></button>";
@@ -525,11 +526,22 @@
     $("#btn-theme use").setAttribute("href", isDark() ? "#i-sun" : "#i-moon");
     try { if (window.AndroidBridge) window.AndroidBridge.setDark(isDark()); } catch (e) { /* خارج أندرويد */ }
   }
+  function rerender() {
+    var y = window.scrollY;
+    ORN.apply();
+    route();
+    window.scrollTo(0, y);
+  }
   function toggleTheme() {
     prefs.theme = isDark() ? "light" : "dark";
     document.documentElement.setAttribute("data-theme", prefs.theme);
-    savePrefs(); syncTheme();
-    toast(prefs.theme === "dark" ? "وضع حبر الليل" : "وضع الرَّقّ");
+    savePrefs(); syncTheme(); rerender();
+    toast(prefs.theme === "dark" ? "الوضع الليلي اللازوردي" : "وضع الرَّقّ العتيق");
+  }
+  if (window.matchMedia) {
+    var mql = matchMedia("(prefers-color-scheme: dark)");
+    var onScheme = function () { if (!prefs.theme) { syncTheme(); rerender(); } };
+    if (mql.addEventListener) mql.addEventListener("change", onScheme); else if (mql.addListener) mql.addListener(onScheme);
   }
   function cycleFont() {
     var i = (FS.indexOf(prefs.fs || 1) + 1) % FS.length;
