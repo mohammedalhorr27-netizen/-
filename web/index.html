@@ -8,50 +8,77 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div id="sky" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#8a5f1c"/><stop offset=".45" stop-color="#e2bd68"/><stop offset=".55" stop-color="#f6e1a4"/><stop offset="1" stop-color="#a87a2c"/>
+      </linearGradient>
+      <symbol id="star8" viewBox="0 0 100 100"><path d="M50 2 63 21 86 14 79 37 98 50 79 63 86 86 63 79 50 98 37 79 14 86 21 63 2 50 21 37 14 14 37 21Z"/></symbol>
+      <symbol id="khatam" viewBox="0 0 100 100"><rect x="18" y="18" width="64" height="64"/><rect x="18" y="18" width="64" height="64" transform="rotate(45 50 50)"/></symbol>
+      <symbol id="i-tree" viewBox="0 0 24 24"><circle cx="19" cy="12" r="2.4"/><circle cx="6" cy="5" r="2.4"/><circle cx="6" cy="12" r="2.4"/><circle cx="6" cy="19" r="2.4"/><path d="M16.6 12H8.4M12.5 12V6a1 1 0 0 0-1-1H8.4M12.5 12v6a1 1 0 0 1-1 1H8.4"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="13.5" cy="10.5" r="6.5"/><path d="m8.8 15.2-5.3 5.3"/></symbol>
+      <symbol id="i-quiz" viewBox="0 0 24 24"><path d="M12 2.8 14 7l4.6.6-3.4 3.2.9 4.6L12 13.2l-4.1 2.2.9-4.6L5.4 7.6 10 7Z"/><path d="M6 21h12"/></symbol>
+      <symbol id="i-bookmark" viewBox="0 0 24 24"><path d="M6.5 3.5h11v17L12 16.5l-5.5 4Z"/></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24"><path d="M19.5 14.6A8 8 0 0 1 9.4 4.5a8 8 0 1 0 10.1 10.1Z"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></symbol>
+      <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.4v.2"/></symbol>
+      <symbol id="i-next" viewBox="0 0 24 24"><path d="m14.5 6-6 6 6 6"/></symbol>
+      <symbol id="i-prev" viewBox="0 0 24 24"><path d="m9.5 6 6 6-6 6"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.2 4.2L19 7"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+      <symbol id="i-expand" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></symbol>
+      <symbol id="i-collapse" viewBox="0 0 24 24"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></symbol>
+      <symbol id="i-scroll" viewBox="0 0 24 24"><path d="M7 4h11a2 2 0 0 1 2 2v1h-4M7 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7M7 4a2 2 0 0 1 2 2v12M11 9h4M11 13h4"/></symbol>
+    </defs>
+  </svg>
 
   <div id="boot" aria-hidden="true">
-    <div class="boot-box">
-      <div class="boot-logo">قطر الندى</div>
-      <div class="pixel boot-label">LOADING NAHW.EXE …</div>
-      <div class="xpbar"><span></span></div>
-    </div>
+    <svg class="boot-star" viewBox="0 0 100 100"><use href="#khatam"/></svg>
+    <div class="boot-title">قطر الندى</div>
+    <div class="boot-sub">وبَلّ الصدى</div>
   </div>
 
   <header id="top">
     <div class="top-row">
-      <button class="icon-btn" id="btn-back" aria-label="رجوع" hidden>›</button>
+      <button class="ib" id="btn-back" aria-label="رجوع" hidden><svg><use href="#i-prev"/></svg></button>
       <div class="brand" id="brand">
-        <span class="drop" aria-hidden="true"></span>
-        <div>
-          <h1 class="chrome-text">قطر الندى</h1>
-          <p class="sub">مشجرة مبسطة بالشروط والشواهد</p>
+        <svg class="emblem" viewBox="0 0 100 100" aria-hidden="true">
+          <use href="#star8" class="em-star"/>
+          <circle cx="50" cy="50" r="24" class="em-core"/>
+          <path class="em-drop" d="M50 33c0 0-10 12-10 19a10 10 0 0 0 20 0c0-7-10-19-10-19Z"/>
+        </svg>
+        <div class="brand-text">
+          <h1>قطر الندى</h1>
+          <p class="sub">مشجرة المتن بالشروط والشواهد</p>
         </div>
       </div>
       <div class="top-actions">
-        <button class="icon-btn" id="btn-font" aria-label="حجم الخط"><span class="font-ico"><b>أ</b><i>أ</i></span></button>
-        <button class="icon-btn" id="btn-theme" aria-label="تبديل الثيم"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 14.6A8.5 8.5 0 0 1 9.4 3.7a.6.6 0 0 0-.8-.7A9.6 9.6 0 1 0 21 15.4a.6.6 0 0 0-.7-.8Z"/><path d="M17 3l.7 1.8L19.5 5.5l-1.8.7L17 8l-.7-1.8-1.8-.7 1.8-.7z"/></svg></button>
-        <button class="icon-btn" id="btn-about" aria-label="عن التطبيق">i</button>
+        <button class="ib" id="btn-font" aria-label="حجم الخط"><span class="fs-ico">ع<small>ع</small></span></button>
+        <button class="ib" id="btn-theme" aria-label="تبديل الوضع"><svg><use href="#i-moon"/></svg></button>
+        <button class="ib" id="btn-about" aria-label="عن التطبيق"><svg><use href="#i-info"/></svg></button>
       </div>
     </div>
-    <div class="marquee" aria-hidden="true"><div class="marquee-track"><span id="marquee-text"></span><span id="marquee-text2"></span></div></div>
+    <div class="rule" aria-hidden="true"><span></span><svg viewBox="0 0 100 100"><use href="#star8"/></svg><span></span></div>
   </header>
 
   <main id="view"></main>
 
   <nav id="tabs">
-    <button data-tab="home" class="on"><span class="ti">✦</span><span>الأبواب</span></button>
-    <button data-tab="search"><span class="ti">⌕</span><span>بحث</span></button>
-    <button data-tab="quiz"><span class="ti">★</span><span>اختبر نفسك</span></button>
-    <button data-tab="saved"><span class="ti">♥</span><span>محفوظاتي</span></button>
+    <button data-tab="home" class="on"><svg><use href="#i-tree"/></svg><span>الأبواب</span></button>
+    <button data-tab="search"><svg><use href="#i-search"/></svg><span>بحث</span></button>
+    <button data-tab="quiz"><svg><use href="#i-quiz"/></svg><span>اختبر نفسك</span></button>
+    <button data-tab="saved"><svg><use href="#i-bookmark"/></svg><span>محفوظاتي</span></button>
   </nav>
 
   <div id="sheet-wrap" hidden>
     <div class="sheet-backdrop" data-close></div>
-    <section class="sheet win" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
-      <div class="win-bar">
-        <span class="win-title pixel" id="sheet-bar">SHARH.EXE</span>
-        <span class="win-btns"><button class="wb" data-close aria-label="إغلاق">×</button></span>
+    <section class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+      <div class="sheet-grip" data-close aria-hidden="true"><span></span></div>
+      <div class="sheet-head">
+        <span class="sheet-tag" id="sheet-bar"></span>
+        <button class="ib sm" data-close aria-label="إغلاق"><svg><use href="#i-close"/></svg></button>
       </div>
       <div class="sheet-body" id="sheet-body"></div>
       <div class="sheet-foot" id="sheet-foot"></div>

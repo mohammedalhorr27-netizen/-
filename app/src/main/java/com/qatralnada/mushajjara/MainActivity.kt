@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Color
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.webkit.JavascriptInterface
 import android.webkit.WebResourceRequest
@@ -86,11 +85,9 @@ class MainActivity : ComponentActivity() {
     private fun isSystemDark(): Boolean =
         (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
 
-    /** يلوّن خلفية شريطي النظام بحسب ثيم الصفحة (Bubblegum أو Cyber). */
+    /** يلوّن خلفية شريطي النظام بحسب وضع الصفحة (الرَّقّ أو حبر الليل). */
     private fun applyBars(dark: Boolean) {
-        val colors = if (dark) intArrayOf(0xFF120A33.toInt(), 0xFF150A3A.toInt(), 0xFF2B0B40.toInt())
-        else intArrayOf(0xFFE4F7FF.toInt(), 0xFFD4B6FF.toInt(), 0xFFFFC0E6.toInt())
-        root.background = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, colors)
+        root.setBackgroundColor(if (dark) 0xFF0C1513.toInt() else 0xFFF2E8D2.toInt())
         val style = if (dark) SystemBarStyle.dark(Color.TRANSPARENT)
         else SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)
         enableEdgeToEdge(statusBarStyle = style, navigationBarStyle = style)
