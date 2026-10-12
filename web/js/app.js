@@ -148,14 +148,51 @@
 
   /* ================= التوجيه ================= */
 
-  function current() { return (location.hash || "#/").slice(1); }
+  // مكدّس تنقّل داخلي هو المرجع، ويُزامَن مع سجل المتصفح متى سمح به ليعمل زر الرجوع في الهاتف والمتصفح
+  var stack = [initialRoute()];
+  var popTimer = null, pending = 0;   // pending: خطوات رجوع طُلبت ولم يصل حدثها بعد
+
+  function initialRoute() {
+    var h = (location.hash || "").replace(/^#\/?/, "");
+    if (/^(map|search|quiz|saved)$/.test(h)) return "/" + h;
+    var m = /^ch[-\/](.+)$/.exec(h);
+    return m && byKey[m[1]] ? "/ch/" + m[1] : "/";
+  }
+  function current() { return stack[stack.length - 1]; }
+  function saveHistory(replace) {
+    try { history[replace ? "replaceState" : "pushState"]({ qd: stack.length - 1, qr: current() }, ""); } catch (e) { /* السجل غير متاح */ }
+  }
   function go(hash, replace) {
-    var d = (history.state && history.state.d) || 0;
-    if (replace) history.replaceState({ d: d }, "", hash);
-    else history.pushState({ d: d + 1 }, "", hash);
+    var r = hash.replace(/^#/, "") || "/";
+    if (replace) stack[stack.length - 1] = r; else stack.push(r);
+    saveHistory(replace);
     route();
   }
-  window.addEventListener("popstate", route);
+  function back(steps) {
+    var len = stack.length - pending;
+    steps = Math.min(steps || 1, len - 1);
+    if (steps < 1) return;
+    pending += steps;
+    var target = len - steps;
+    try { history.go(-steps); } catch (e) { /* السجل غير متاح */ }
+    clearTimeout(popTimer);
+    popTimer = setTimeout(function () { pending = 0; if (stack.length > target) { stack.length = target; route(); } }, 350);
+  }
+  function goHome() {
+    if (current() === "/" || pending) return;
+    if (stack[0] === "/" && stack.length > 1) back(stack.length - 1); else go("#/", true);
+  }
+  window.addEventListener("popstate", function (ev) {
+    var s = ev.state;
+    if (!s || typeof s.qd !== "number") return;
+    var applied = stack.length - (s.qd + 1);
+    pending = applied > 0 ? Math.max(0, pending - applied) : 0;
+    if (!pending) clearTimeout(popTimer);
+    stack.length = Math.min(stack.length, s.qd + 1);
+    while (stack.length < s.qd + 1) stack.push(s.qr);
+    stack[stack.length - 1] = s.qr;
+    route();
+  });
 
   function route() {
     var r = current(), tab = "home";
@@ -167,18 +204,17 @@
     else if (r === "/saved") { tab = "saved"; renderSaved(); }
     else renderHome();
     document.querySelectorAll("#tabs button").forEach(function (b) { b.classList.toggle("on", b.dataset.tab === tab); });
-    $("#btn-back").hidden = r === "/" || r === "";
+    $("#btn-back").hidden = r === "/";
     window.scrollTo(0, 0);
   }
 
   // زر الرجوع في أندرويد يستدعي هذه الدالة
   window.__back = function () {
     if (!$("#sheet-wrap").hidden) { closeSheet(); return true; }
-    var r = current();
-    if (r === "/" || r === "") return false;
-    if (history.state && history.state.d > 0) history.back();
-    else go("#/", true);
-    return true;
+    if (stack.length - pending > 1) { back(1); return true; }
+    if (pending) return true;
+    if (current() !== "/") { go("#/", true); return true; }
+    return false;
   };
 
   /* ================= الرئيسية ================= */
@@ -567,24 +603,21 @@
     if (d.ans) { answer(+d.ans); return; }
     if ("nextQ" in d) { newQuestion(); renderQuiz(); return; }
     if ("reset" in d) {
-      if (confirm("مسح كل علامات الفهم؟")) { done.clear(); saveDone(); renderSaved(); toast("تم المسح"); }
+      // تأكيد بالضغط مرتين، لأن نوافذ التأكيد لا تظهر في بعض المتصفحات وفي تطبيق أندرويد
+      if (d.armed && Date.now() - +d.armed < 4000) { done.clear(); saveDone(); renderSaved(); toast("تم مسح التقدّم"); }
+      else { d.armed = Date.now(); t.textContent = "اضغط مرة أخرى للتأكيد"; }
       return;
     }
     if (d.tab) {
-      var target = { home: "#/", search: "#/search", quiz: "#/quiz", saved: "#/saved" }[d.tab];
-      if (current() === target.slice(1)) return;
-      var depth = (history.state && history.state.d) || 0;
-      if (d.tab === "home" && depth > 0) history.go(-depth);
+      var target = { home: "/", search: "/search", quiz: "/quiz", saved: "/saved" }[d.tab];
+      if (current() === target) return;
+      if (d.tab === "home") goHome();
       else go(target, current() !== "/");
     }
   });
 
   $("#btn-back").addEventListener("click", function () { window.__back(); });
-  $("#brand").addEventListener("click", function () {
-    if (current() === "/") return;
-    var d = (history.state && history.state.d) || 0;
-    if (d > 0) history.go(-d); else go("#/", true);
-  });
+  $("#brand").addEventListener("click", goHome);
   $("#btn-theme").addEventListener("click", toggleTheme);
   $("#btn-font").addEventListener("click", cycleFont);
   $("#btn-about").addEventListener("click", openAbout);
@@ -592,8 +625,13 @@
 
   /* ================= البدء ================= */
 
-  history.replaceState({ d: 0 }, "", location.hash || "#/");
+  saveHistory(true);
   route();
   syncTheme();
-  setTimeout(function () { $("#boot").classList.add("gone"); }, 1300);
+  setTimeout(function () { $("#boot").classList.add("gone"); }, 1100);
+
+  // عند الاستضافة على موقع: يعمل بلا إنترنت ويمكن تثبيته على الشاشة الرئيسية
+  if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol) && !window.AndroidBridge) {
+    try { navigator.serviceWorker.register("sw.js").catch(function () { /* غير متاح هنا */ }); } catch (e) { /* غير متاح هنا */ }
+  }
 })();
