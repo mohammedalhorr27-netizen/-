@@ -245,7 +245,7 @@
     if (!mm) return;
     mm.style.zoom = 1;
     var avail = wrap.clientWidth - 20, need = mm.scrollWidth;
-    zoom = need > avail ? Math.max(0.72, Math.floor(avail / need * 20) / 20) : 1;
+    zoom = need > avail ? Math.max(0.78, Math.floor(avail / need * 20) / 20) : 1;
     mm.style.zoom = zoom;
   }
 
@@ -261,7 +261,7 @@
 
   /* ================= صفحة الباب ================= */
 
-  function renderChapter(ch) {
+  function renderChapter(ch, keepZoom) {
     var mode = prefs.view === "list" ? "list" : "map";
     var dn = chDone(ch), cp = pct(dn, ch.all.length);
     var h = '<section class="win ch-head">' + winBar("BAB_" + pad(ch.num) + ".EXE") + '<div class="win-body">' +
@@ -271,11 +271,12 @@
       '<div class="progress-row"><span>أنجزت</span>' + segBar(cp) + '<span class="pixel">' + dn + "/" + ch.all.length + "</span></div>" +
       '<div class="ctl-row" style="margin-top:.75rem"><div class="seg-ctl"><button data-mode="map"' + (mode === "map" ? ' class="on"' : "") + '>🌳 المشجرة</button><button data-mode="list"' + (mode === "list" ? ' class="on"' : "") + ">📜 الشرح المفصّل</button></div>" +
       (mode === "map" ? '<div class="zoom"><button class="icon-btn" data-zoom="-1" aria-label="تصغير">−</button><button class="icon-btn" data-zoom="1" aria-label="تكبير">+</button></div>' : "") + "</div>" +
-      '<p class="hint">' + (mode === "map" ? "اضغط على أي غصن لترى شرحه وشروطه وشاهده · النقطة الوردية = فيه شاهد · اسحب للتنقّل" : "الباب كاملًا مقروءًا من أوله إلى آخره · اضغط العنوان لفتحه في نافذة") + "</p>" +
+      (mode === "map" ? '<div class="btn-row" style="margin-top:.6rem"><button class="btn ghost sm-btn" data-expand="1">⊕ توسيع الكل</button><button class="btn ghost sm-btn" data-expand="0">⊖ طي الكل</button></div>' : "") +
+      '<p class="hint">' + (mode === "map" ? "اضغط على أي غصن لترى شرحه وشروطه وشاهده · الدائرة الصغيرة تفتح الفروع المطويّة · اسحب يمينًا ويسارًا للتنقّل" : "الباب كاملًا مقروءًا من أوله إلى آخره · اضغط «فتح» لعرض الغصن في نافذة") + "</p>" +
       "</div></section>";
 
     if (mode === "map") {
-      h += '<section class="win">' + winBar("TREE.MAP") + '<div class="map-wrap"><div class="mm" style="zoom:' + zoom + '">' + mapNode(ch) + "</div></div></section>";
+      h += '<section class="win">' + winBar("TREE.MAP") + '<div class="map-wrap"><div class="mm mm-top" style="zoom:' + zoom + '"><button class="mm-node d0 root-ch" data-open="' + ch.key + '">' + (done.has(ch.key) ? '<span class="ok">✓</span>' : "") + esc(ch.node.t) + '</button><div class="mm-trunk">' + ch.kids.map(mapNode).join("") + "</div></div></div></section>";
     } else {
       h += '<section class="win">' + winBar("SHARH.TXT") + '<div class="win-body outline">' + ch.all.map(outlineNode).join("") + "</div></section>";
     }
@@ -284,14 +285,26 @@
       (prev ? '<button class="btn ghost" data-go-replace="#/ch/' + prev.key + '">→ ' + esc(prev.node.t) + "</button>" : "<span></span>") +
       (next ? '<button class="btn" data-go-replace="#/ch/' + next.key + '">' + esc(next.node.t) + " ←</button>" : "") + "</div>";
     view.innerHTML = h;
-    if (mode === "map") fitMap();
+    if (mode === "map" && !keepZoom) fitMap();
   }
 
+  // طيّ الفروع: الأبواب الكبيرة تُعرض مطويّة بعد المستوى الثاني ما لم يفتحها المستخدم
+  var toggled = {};
+  function isClosed(e) {
+    if (!e.kids.length) return false;
+    if (e.key in toggled) return toggled[e.key];
+    return e.depth >= 2 && e.ch.all.length > 30;
+  }
+  function descCount(e) { return e.kids.reduce(function (n, k) { return n + 1 + descCount(k); }, 0); }
+  function setAll(ch, closed) { ch.all.forEach(function (e) { if (e.kids.length && e.depth > 0) toggled[e.key] = closed; }); }
+
   function mapNode(e) {
-    var n = e.node;
-    var cls = "mm-node d" + Math.min(e.depth, 6) + (n.sh ? " has-sh" : "");
-    var h = '<div class="mm-item"><button class="' + cls + '" data-open="' + e.key + '">' + (done.has(e.key) ? '<span class="ok">✓</span>' : "") + esc(n.t) + "</button>";
-    if (e.kids.length) h += '<div class="mm-kids">' + e.kids.map(mapNode).join("") + "</div>";
+    var n = e.node, closed = isClosed(e);
+    var cls = "mm-node d" + Math.min(e.depth, 6);
+    var h = '<div class="mm-item' + (closed ? " closed" : "") + '"><span class="mm-nw"><button class="' + cls + '" data-open="' + e.key + '">' + (done.has(e.key) ? '<span class="ok">✓</span>' : "") + esc(n.t) + "</button>";
+    if (e.kids.length && e.depth > 0) h += '<button class="mm-tog" data-tog="' + e.key + '" aria-label="' + (closed ? "فتح الفروع" : "طي الفروع") + '">' + (closed ? "+" + descCount(e) : "−") + "</button>";
+    h += "</span>";
+    if (e.kids.length && !closed) h += '<div class="mm-kids">' + e.kids.map(mapNode).join("") + "</div>";
     return h + "</div>";
   }
 
@@ -345,7 +358,7 @@
     var r = current();
     if (r.indexOf("/ch/") === 0) {
       var y = window.scrollY, wrap = view.querySelector(".map-wrap"), sx = wrap ? wrap.scrollLeft : 0, sy = wrap ? wrap.scrollTop : 0;
-      renderChapter(byKey[r.slice(4)]);
+      renderChapter(byKey[r.slice(4)], true);
       window.scrollTo(0, y);
       wrap = view.querySelector(".map-wrap");
       if (wrap) { wrap.scrollLeft = sx; wrap.scrollTop = sy; }
@@ -535,6 +548,8 @@
     if (d.goReplace) { go(d.goReplace, true); return; }
     if (d.mode) { prefs.view = d.mode; savePrefs(); renderChapter(byKey[current().slice(4)]); return; }
     if (d.zoom) { setZoom(+d.zoom); return; }
+    if (d.tog) { var te = byKey[d.tog]; toggled[d.tog] = !isClosed(te); refreshMarks(); return; }
+    if (d.expand) { setAll(byKey[current().slice(4)], d.expand === "0"); refreshMarks(); toast(d.expand === "0" ? "طُويت الفروع" : "فُتحت كل الفروع"); return; }
     if (d.step) { var e = byKey[sheetKey], n = e && flat[e.i + +d.step]; if (n) openNode(n.key); return; }
     if ("done" in d && sheetKey) {
       if (done.has(sheetKey)) done.delete(sheetKey); else { done.add(sheetKey); toast("أحسنت! ✓"); }

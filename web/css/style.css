@@ -34,7 +34,7 @@
     --line: #39f3ff;
     --hot: #ff4fd8; --cyan: #39f3ff; --violet: #a184ff; --lime: #b6ff3b; --sun: #ffe14d; --red: #ff5c7a;
     --chrome: linear-gradient(180deg, #3b3285 0%, #1d1650 48%, #120d36 52%, #3a2f86 100%);
-    --mark-bg: linear-gradient(180deg, transparent 30%, rgba(182, 255, 59, .42) 30%);
+    --mark-bg: linear-gradient(180deg, transparent 28%, rgba(255, 79, 216, .5) 28%, rgba(161, 132, 255, .5) 100%);
     --mark-ink: #fff;
     --grid: rgba(57, 243, 255, .3);
     --shadow: 0 5px 0 rgba(0, 0, 0, .45), 0 14px 30px rgba(0, 0, 0, .45);
@@ -50,7 +50,7 @@
   --line: #39f3ff;
   --hot: #ff4fd8; --cyan: #39f3ff; --violet: #a184ff; --lime: #b6ff3b; --sun: #ffe14d; --red: #ff5c7a;
   --chrome: linear-gradient(180deg, #3b3285 0%, #1d1650 48%, #120d36 52%, #3a2f86 100%);
-  --mark-bg: linear-gradient(180deg, transparent 30%, rgba(182, 255, 59, .42) 30%);
+  --mark-bg: linear-gradient(180deg, transparent 28%, rgba(255, 79, 216, .5) 28%, rgba(161, 132, 255, .5) 100%);
   --mark-ink: #fff;
   --grid: rgba(57, 243, 255, .3);
   --shadow: 0 5px 0 rgba(0, 0, 0, .45), 0 14px 30px rgba(0, 0, 0, .45);
@@ -205,8 +205,13 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .mm-trunk > .mm-item::after { content: ""; position: absolute; right: 0; top: -.5rem; bottom: 0; border-right: 2px solid var(--line); }
 .mm-trunk > .mm-item:last-child::after { bottom: 50%; }
 .mm-item { display: flex; align-items: center; }
-.mm-kids { position: relative; display: flex; flex-direction: column; gap: .45rem; padding-right: 18px; }
-.mm-kids::before { content: ""; position: absolute; right: 0; top: 50%; width: 18px; border-top: 2px solid var(--line); }
+.mm-kids { position: relative; display: flex; flex-direction: column; gap: .45rem; padding-right: 22px; }
+.mm-kids::before { content: ""; position: absolute; right: 0; top: 50%; width: 22px; border-top: 2px solid var(--line); }
+.mm-nw { position: relative; flex: none; display: inline-flex; }
+.mm-tog { position: absolute; left: 0; top: 50%; transform: translate(-78%, -50%); z-index: 2; min-width: 22px; height: 22px; padding: 0 .3rem; border: 0; border-radius: 999px; font-family: "Silkscreen", monospace; font-size: .62rem; line-height: 22px; color: #fff; background: var(--ink); box-shadow: 0 0 0 2px var(--panel-solid), 0 2px 0 rgba(29, 20, 80, .3); direction: ltr; }
+.mm-item.closed > .mm-nw > .mm-tog { background: var(--hot); transform: translate(-85%, -50%); }
+.mm-node.root-ch { max-width: 16em; margin-bottom: .45rem; }
+.sm-btn { padding: .3rem .8rem; font-size: .8rem; }
 .mm-kids > .mm-item { position: relative; padding-right: 16px; }
 .mm-kids > .mm-item::before { content: ""; position: absolute; right: 0; top: 50%; width: 16px; border-top: 2px solid var(--line); }
 .mm-kids > .mm-item::after { content: ""; position: absolute; right: 0; top: 0; bottom: 0; border-right: 2px solid var(--line); }
@@ -227,8 +232,6 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .mm-node.flash { animation: flash 1.2s ease 2; }
 @keyframes flash { 50% { box-shadow: 0 0 0 4px var(--hot), 0 0 18px var(--hot); } }
 .mm-node:active { transform: scale(.96); }
-.mm-node.has-sh::before { content: ""; position: absolute; bottom: 4px; left: 5px; width: 6px; height: 6px; border-radius: 50%; background: var(--hot); box-shadow: 0 0 0 1.5px #fff; }
-.mm-node.d0.has-sh::before { background: #fff; }
 
 /* ============ الشرح المفصل ============ */
 .outline { padding: .4rem .2rem .2rem; }
