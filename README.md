@@ -10,10 +10,11 @@
 
 | الرئيسية | المشجرة | صفحة الفرع | اختبر نفسك | حبر الليل |
 |---|---|---|---|---|
-| ![](docs/screenshots/home.png) | ![](docs/screenshots/map.png) | ![](docs/screenshots/sheet.png) | ![](docs/screenshots/quiz.png) | ![](docs/screenshots/dark.png) |
+| ![](screenshots/home.png) | ![](screenshots/map.png) | ![](screenshots/sheet.png) | ![](screenshots/quiz.png) | ![](screenshots/dark.png) |
 
 ## نسخة الويب (آيفون وأندرويد)
-- مجلد `web/` تطبيق ويب كامل: يُفتح في أي متصفح، ويمكن «إضافته إلى الشاشة الرئيسية» على الآيفون والأندرويد، ويعمل بلا إنترنت بعد أول زيارة إذا استُضيف على موقع (مثل GitHub Pages).
+- **الرابط للجميع:** https://mohammedalhorr27-netizen.github.io/-/ (بعد تفعيل GitHub Pages من إعدادات المستودع: Pages ← Deploy from a branch ← `claude/qatr-alnada-app` و`/docs`).
+- مجلد `docs/` هو تطبيق الويب نفسه: يُفتح في أي متصفح، ويمكن «إضافته إلى الشاشة الرئيسية» على الآيفون والأندرويد، ويعمل بلا إنترنت بعد أول زيارة. وهو أيضًا ما يُضمَّن في تطبيق أندرويد.
 - `python3 tools/build-single.py OUT.html` يبني النسخة كلها في ملف HTML واحد (الخطوط والبيانات مضمّنة، نحو ١٫٥ ميغابايت)، و`--fragment` لنسخة تُنشر داخل صفحة مستضيفة.
 
 ## المزايا
@@ -27,7 +28,7 @@
 
 ## بنية المشروع
 ```
-web/              واجهة التطبيق (HTML/CSS/JS) — تُضمَّن كأصول في التطبيق
+docs/             واجهة التطبيق (HTML/CSS/JS): موقع GitHub Pages، وتُضمَّن كأصول في تطبيق أندرويد
   data/part-*.js  محتوى المشجرة (باب لكل عقدة عليا)
 app/              مشروع أندرويد (WebView)
 tools/validate.js أداة التحقق من صحة ملفات المحتوى
@@ -47,4 +48,4 @@ node tools/validate.js          # التحقق من المحتوى
 الشاهد: `x` النص، `h` موضع الشاهد (يُظلَّل)، `s` نوعه (`q` قرآن، `h` حديث، `p` شعر، `a` قول، `m` مثال)، `ref` المرجع، `w` وجه الاستشهاد.
 
 ## الرخص
-الخطوط (Aref Ruqaa، IBM Plex Sans Arabic، Amiri) برخصة SIL Open Font License — النصوص في `web/fonts/`.
+الخطوط (Aref Ruqaa، IBM Plex Sans Arabic، Amiri) برخصة SIL Open Font License — النصوص في `docs/fonts/`.

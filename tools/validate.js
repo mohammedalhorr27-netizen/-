@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-// يتحقق من صحة ملفات بيانات المشجرة: node tools/validate.js web/data/part-a.js [...]
-// بدون وسائط: يتحقق من كل ملفات web/data/*.js
+// يتحقق من صحة ملفات بيانات المشجرة: node tools/validate.js docs/data/part-a.js [...]
+// بدون وسائط: يتحقق من كل ملفات docs/data/*.js
 const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
@@ -12,7 +12,7 @@ const STR_ARRAYS = ["c", "r", "n"];
 
 let files = process.argv.slice(2);
 if (!files.length) {
-  const dir = path.join(__dirname, "..", "web", "data");
+  const dir = path.join(__dirname, "..", "docs", "data");
   files = fs.readdirSync(dir).filter(f => /^part-.*\.js$/.test(f)).sort().map(f => path.join(dir, f));
 }
 

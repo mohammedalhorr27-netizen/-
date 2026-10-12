@@ -43,7 +43,7 @@ android {
         }
     }
 
-    sourceSets["main"].assets.srcDirs("../web")
+    sourceSets["main"].assets.srcDirs("../docs")
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17

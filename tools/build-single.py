@@ -13,7 +13,7 @@ from pathlib import Path
 
 from fontTools.ttLib import TTFont
 
-WEB = Path(__file__).resolve().parent.parent / "web"
+WEB = Path(__file__).resolve().parent.parent / "docs"
 
 
 def woff2_data_uri(ttf_path: Path) -> str:
