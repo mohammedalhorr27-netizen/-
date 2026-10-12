@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <!-- قطرة الندى -->
+    <path android:strokeColor="#FF1D1450" android:strokeWidth="2.6" android:strokeLineJoin="round"
+        android:pathData="M53,24C53,24 34,46 34,61A19,19 0,0 0,72 61C72,46 53,24 53,24Z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="linear" android:startX="36" android:startY="26" android:endX="72" android:endY="80">
+                <item android:offset="0" android:color="#FF7FF0FF" />
+                <item android:offset="0.55" android:color="#FF8D6BFF" />
+                <item android:offset="1" android:color="#FFFF5CC8" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <!-- لمعة -->
+    <path android:strokeColor="#E6FFFFFF" android:strokeWidth="4.2" android:strokeLineCap="round"
+        android:pathData="M44.5,52C41.5,57 41.5,63 43.5,67" />
+    <path android:fillColor="#E6FFFFFF" android:pathData="M47,72m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0" />
+    <!-- نجمة Y2K -->
+    <path android:fillColor="#FFFFFFFF" android:strokeColor="#FF1D1450" android:strokeWidth="1.6" android:strokeLineJoin="round"
+        android:pathData="M72,28Q73.6,36.4 82,38Q73.6,39.6 72,48Q70.4,39.6 62,38Q70.4,36.4 72,28Z" />
+    <path android:fillColor="#FFFFFFFF" android:strokeColor="#FF1D1450" android:strokeWidth="1.2" android:strokeLineJoin="round"
+        android:pathData="M35,33Q35.9,37.1 40,38Q35.9,38.9 35,43Q34.1,38.9 30,38Q34.1,37.1 35,33Z" />
+</vector>

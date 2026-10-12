@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <title>مشجرة قطر الندى</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="sky" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+  <div id="boot" aria-hidden="true">
+    <div class="boot-box">
+      <div class="boot-logo">قطر الندى</div>
+      <div class="pixel boot-label">LOADING NAHW.EXE …</div>
+      <div class="xpbar"><span></span></div>
+    </div>
+  </div>
+
+  <header id="top">
+    <div class="top-row">
+      <button class="icon-btn" id="btn-back" aria-label="رجوع" hidden>›</button>
+      <div class="brand" id="brand">
+        <span class="drop" aria-hidden="true"></span>
+        <div>
+          <h1 class="chrome-text">قطر الندى</h1>
+          <p class="sub">مشجرة مبسطة بالشروط والشواهد</p>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="icon-btn" id="btn-font" aria-label="حجم الخط"><span class="font-ico"><b>أ</b><i>أ</i></span></button>
+        <button class="icon-btn" id="btn-theme" aria-label="تبديل الثيم"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 14.6A8.5 8.5 0 0 1 9.4 3.7a.6.6 0 0 0-.8-.7A9.6 9.6 0 1 0 21 15.4a.6.6 0 0 0-.7-.8Z"/><path d="M17 3l.7 1.8L19.5 5.5l-1.8.7L17 8l-.7-1.8-1.8-.7 1.8-.7z"/></svg></button>
+        <button class="icon-btn" id="btn-about" aria-label="عن التطبيق">i</button>
+      </div>
+    </div>
+    <div class="marquee" aria-hidden="true"><div class="marquee-track"><span id="marquee-text"></span><span id="marquee-text2"></span></div></div>
+  </header>
+
+  <main id="view"></main>
+
+  <nav id="tabs">
+    <button data-tab="home" class="on"><span class="ti">✦</span><span>الأبواب</span></button>
+    <button data-tab="search"><span class="ti">⌕</span><span>بحث</span></button>
+    <button data-tab="quiz"><span class="ti">★</span><span>اختبر نفسك</span></button>
+    <button data-tab="saved"><span class="ti">♥</span><span>محفوظاتي</span></button>
+  </nav>
+
+  <div id="sheet-wrap" hidden>
+    <div class="sheet-backdrop" data-close></div>
+    <section class="sheet win" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+      <div class="win-bar">
+        <span class="win-title pixel" id="sheet-bar">SHARH.EXE</span>
+        <span class="win-btns"><button class="wb" data-close aria-label="إغلاق">×</button></span>
+      </div>
+      <div class="sheet-body" id="sheet-body"></div>
+      <div class="sheet-foot" id="sheet-foot"></div>
+    </section>
+  </div>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/boot.js"></script>
+  <script src="data/part-a.js"></script>
+  <script src="data/part-b.js"></script>
+  <script src="data/part-c.js"></script>
+  <script src="data/part-d.js"></script>
+  <script src="data/part-e.js"></script>
+  <script src="data/part-f.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
