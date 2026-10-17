@@ -9,3 +9,6 @@ keystore.properties
 *.keystore
 dist/*.idsig
 .kotlin/
+ios/**/xcuserdata/
+*.xcuserstate
+DerivedData/

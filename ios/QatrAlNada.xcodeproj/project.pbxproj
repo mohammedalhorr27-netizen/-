@@ -1,0 +1,271 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0D0A00000000000000000031 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A00000000000000000021 /* AppDelegate.swift */; };
+		0D0A00000000000000000032 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A00000000000000000022 /* SceneDelegate.swift */; };
+		0D0A00000000000000000033 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A00000000000000000023 /* WebViewController.swift */; };
+		0D0A00000000000000000034 /* BundleSchemeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A00000000000000000024 /* BundleSchemeHandler.swift */; };
+		0D0A00000000000000000035 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D0A00000000000000000025 /* Assets.xcassets */; };
+		0D0A00000000000000000036 /* docs in Resources */ = {isa = PBXBuildFile; fileRef = 0D0A00000000000000000026 /* docs */; };
+		0D0A00000000000000000037 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 0D0A00000000000000000028 /* PrivacyInfo.xcprivacy */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0D0A00000000000000000021 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0D0A00000000000000000022 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		0D0A00000000000000000023 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		0D0A00000000000000000024 /* BundleSchemeHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleSchemeHandler.swift; sourceTree = "<group>"; };
+		0D0A00000000000000000025 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0D0A00000000000000000026 /* docs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = docs; path = ../docs; sourceTree = SOURCE_ROOT; };
+		0D0A00000000000000000027 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D0A00000000000000000028 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		0D0A00000000000000000029 /* QatrAlNada.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QatrAlNada.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0D0A00000000000000000042 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0D0A00000000000000000010 = {
+			isa = PBXGroup;
+			children = (
+				0D0A00000000000000000011 /* QatrAlNada */,
+				0D0A00000000000000000026 /* docs */,
+				0D0A00000000000000000012 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0D0A00000000000000000011 /* QatrAlNada */ = {
+			isa = PBXGroup;
+			children = (
+				0D0A00000000000000000021 /* AppDelegate.swift */,
+				0D0A00000000000000000022 /* SceneDelegate.swift */,
+				0D0A00000000000000000023 /* WebViewController.swift */,
+				0D0A00000000000000000024 /* BundleSchemeHandler.swift */,
+				0D0A00000000000000000025 /* Assets.xcassets */,
+				0D0A00000000000000000027 /* Info.plist */,
+				0D0A00000000000000000028 /* PrivacyInfo.xcprivacy */,
+			);
+			path = QatrAlNada;
+			sourceTree = "<group>";
+		};
+		0D0A00000000000000000012 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0D0A00000000000000000029 /* QatrAlNada.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0D0A00000000000000000051 /* QatrAlNada */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0D0A00000000000000000062 /* Build configuration list for PBXNativeTarget "QatrAlNada" */;
+			buildPhases = (
+				0D0A00000000000000000041 /* Sources */,
+				0D0A00000000000000000042 /* Frameworks */,
+				0D0A00000000000000000043 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QatrAlNada;
+			productName = QatrAlNada;
+			productReference = 0D0A00000000000000000029 /* QatrAlNada.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0D0A00000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					0D0A00000000000000000051 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = 0D0A00000000000000000061 /* Build configuration list for PBXProject "QatrAlNada" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = ar;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				ar,
+				Base,
+			);
+			mainGroup = 0D0A00000000000000000010;
+			productRefGroup = 0D0A00000000000000000012 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0D0A00000000000000000051 /* QatrAlNada */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0D0A00000000000000000043 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D0A00000000000000000035 /* Assets.xcassets in Resources */,
+				0D0A00000000000000000036 /* docs in Resources */,
+				0D0A00000000000000000037 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0D0A00000000000000000041 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D0A00000000000000000031 /* AppDelegate.swift in Sources */,
+				0D0A00000000000000000032 /* SceneDelegate.swift in Sources */,
+				0D0A00000000000000000033 /* WebViewController.swift in Sources */,
+				0D0A00000000000000000034 /* BundleSchemeHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0D0A00000000000000000071 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		0D0A00000000000000000072 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0D0A00000000000000000073 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = QatrAlNada/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qatralnada.mushajjara;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0D0A00000000000000000074 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = QatrAlNada/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qatralnada.mushajjara;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0D0A00000000000000000061 /* Build configuration list for PBXProject "QatrAlNada" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0D0A00000000000000000071 /* Debug */,
+				0D0A00000000000000000072 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0D0A00000000000000000062 /* Build configuration list for PBXNativeTarget "QatrAlNada" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0D0A00000000000000000073 /* Debug */,
+				0D0A00000000000000000074 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0D0A00000000000000000001 /* Project object */;
+}

@@ -208,7 +208,7 @@
     window.scrollTo(0, 0);
   }
 
-  // زر الرجوع في أندرويد يستدعي هذه الدالة
+  // زر الرجوع في أندرويد يستدعي هذه الدالة (وفي الآيفون تكفي إيماءة السحب لأنها تمرّ عبر popstate)
   window.__back = function () {
     if (!$("#sheet-wrap").hidden) { closeSheet(); return true; }
     if (stack.length - pending > 1) { back(1); return true; }
@@ -560,6 +560,7 @@
   function syncTheme() {
     $("#btn-theme use").setAttribute("href", isDark() ? "#i-sun" : "#i-moon");
     try { if (window.AndroidBridge) window.AndroidBridge.setDark(isDark()); } catch (e) { /* خارج أندرويد */ }
+    try { window.webkit.messageHandlers.theme.postMessage(isDark()); } catch (e) { /* خارج تطبيق الآيفون */ }
   }
   function toggleTheme() {
     prefs.theme = isDark() ? "light" : "dark";
@@ -628,6 +629,7 @@
   saveHistory(true);
   route();
   syncTheme();
+  try { matchMedia("(prefers-color-scheme: dark)").addEventListener("change", syncTheme); } catch (e) { /* متصفح قديم */ }
   setTimeout(function () { $("#boot").classList.add("gone"); }, 1100);
 
   // عند الاستضافة على موقع: يعمل بلا إنترنت ويمكن تثبيته على الشاشة الرئيسية
